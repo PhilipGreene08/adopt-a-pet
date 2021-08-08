@@ -4,6 +4,12 @@
     padding: 0;
 }
 
+body {
+    background-color: #333;
+    height: 100vh;
+    margin: 0;
+}
+
 #main-page {
     max-height: 600px;
 }
@@ -67,3 +73,47 @@
     background-color: #333;
     color: white;
 }
+
+/* Search By Location */
+.search-form {
+    background-color: #333;
+    height: 75vh;
+}
+
+.search-form-container {
+    max-width: 1100px;
+    overflow: none;
+    margin: auto;
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    padding: 1.5rem 0;
+    gap: 10px;
+}
+
+/* form label, form select, form input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+} */
+/*
+form #type {
+    display: block;
+   
+} */
+
+/* footer */
+
+footer {
+    margin-top: auto;
+}
+

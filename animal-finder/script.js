@@ -92,7 +92,7 @@ const getData = () => {
     console.log(orgData);
 }
 getData().then(orgData => orgData.forEach(animal => {
-    console.log(animal.id);
+    console.log(animal);
 }))
 
 
