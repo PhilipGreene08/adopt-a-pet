@@ -9,12 +9,14 @@ const type = document.getElementById('type')
 const zip = document.getElementById('zip')
 const distance = document.getElementById('distance')
 
+
+
 //check for type
 
 submit.addEventListener('click', function (e) {
     e.preventDefault()
 
-    let animalData
+    //let animalData
     if (type.value === 'none' | distance.value > 500 | zip.length < 5 | zip.length > 5) {
         console.log(`error`);
     } else {
@@ -36,15 +38,53 @@ submit.addEventListener('click', function (e) {
             }).then(function (resp) {
                 return resp.json()
             }).then(function (data) {
+                //console.log(data);
+                let animalData
                 animalData = data.animals
                 console.log(animalData);
-                return animalData
+                //filterPhotos(animalData)
+                showAnimals(animalData)
             })
         }).catch(function (err) {
             console.log('something went wrong', err);
         });
     }
 })
+
+// function filterPhotos(pets) {
+//     pets.forEach(pet => console.log(pet.primary_photo_cropped))
+
+// }
+
+
+function showAnimals(pets) {
+    //console.log(pets);
+    const results = document.querySelector('.results')
+    pets.forEach(animal => {
+        console.log(animal.primary_photo_cropped);
+        const div = document.createElement('div')
+        div.classList.add('info-list')
+        div.innerHTML = `
+        ${animal.primary_photo_cropped == null ? `<img src="/photos/alexis-chloe-dD75iU5UAU4-unsplash.jpg" alt="">` : `<img src="${animal.primary_photo_cropped.small}" alt="">`}
+                <div class="info-list">
+                    <ul>
+                        <li>
+                            <p>${animal.name}, ${animal.age}</p>
+                        </li>
+                        <li>
+                            <p>${animal.contact.email}</p>
+                        </li>
+                        <li>
+                            <p>${animal.contact.phone}</p>
+                        </li>
+                    </ul>
+                </div>
+        `
+        results.appendChild(div)
+    });
+}
+
+
 // const type1 = 'dog'
 // const zip1 = '55378'
 // const distance1 = 500
@@ -89,45 +129,45 @@ submit.addEventListener('click', function (e) {
 
 
 
-var org = 'RI77';
-var status = 'adoptable';
+// var org = 'RI77';
+// var status = 'adoptable';
 
-const getData = () => {
-    let orgData
-    return fetch('https://api.petfinder.com/v2/oauth2/token', {
-        method: 'POST',
-        body: 'grant_type=client_credentials&client_id=' + key + '&client_secret=' + secret,
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }
-    }).then(function (resp) {
+// const getData = () => {
+//     let orgData
+//     return fetch('https://api.petfinder.com/v2/oauth2/token', {
+//         method: 'POST',
+//         body: 'grant_type=client_credentials&client_id=' + key + '&client_secret=' + secret,
+//         headers: {
+//             'Content-Type': 'application/x-www-form-urlencoded'
+//         }
+//     }).then(function (resp) {
 
-        // Return the response as JSON
-        return resp.json();
+//         // Return the response as JSON
+//         return resp.json();
 
-    }).then(randomData = function (data) {
+//     }).then(randomData = function (data) {
 
-        return fetch('https://api.petfinder.com/v2/animals?organization=' + org + '&status=' + status, {
-            headers: {
-                'Authorization': data.token_type + ' ' + data.access_token,
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        });
+//         return fetch('https://api.petfinder.com/v2/animals?organization=' + org + '&status=' + status, {
+//             headers: {
+//                 'Authorization': data.token_type + ' ' + data.access_token,
+//                 'Content-Type': 'application/x-www-form-urlencoded'
+//             }
+//         });
 
-    }).then(function (resp) {
+//     }).then(function (resp) {
 
-        // Return the API response as JSON
-        return resp.json();
+//         // Return the API response as JSON
+//         return resp.json();
 
-    }).then(function (data) {
-        orgData = data.animals
-        // Log the pet data
-        console.log(data);
-        return orgData
-    })
+//     }).then(function (data) {
+//         orgData = data.animals
+//         // Log the pet data
+//         console.log(data);
+//         return orgData
+//     })
 
-}
-getData().then(orgData => console.log(orgData))
+// }
+// getData().then(orgData => console.log(orgData))
 
-//getAnimalData().then(animalData => console.log(animalData))
+// //getAnimalData().then(animalData => console.log(animalData))
 
