@@ -20,6 +20,9 @@ submit.addEventListener('click', function (e) {
     if (type.value === 'none' | distance.value > 500 | zip.length < 5 | zip.length > 5) {
         console.log(`error`);
     } else {
+        // type.value = 'dog'
+        // zip.value = 55378
+        // distance.value = 30
         console.log(type.value, distance.value, zip.length);
         return fetch(`https://api.petfinder.com/v2/oauth2/token`, {
             method: 'POST',
@@ -66,19 +69,20 @@ function showAnimals(pets) {
         div.classList.add('info-list')
         div.innerHTML = `
         ${animal.primary_photo_cropped == null ? `<img src="/photos/alexis-chloe-dD75iU5UAU4-unsplash.jpg" alt="">` : `<img src="${animal.primary_photo_cropped.small}" alt="">`}
-                <div class="info-list">
+                <div class="animal-info-list">
                     <ul>
                         <li>
                             <p>${animal.name}, ${animal.age}</p>
                         </li>
                         <li>
-                            <p>${animal.contact.email}</p>
+                            <p>${animal.contact.email === null ? `Please Call Us` : `${animal.contact.email}`}</p>
                         </li>
                         <li>
-                            <p>${animal.contact.phone}</p>
+                            <p>${animal.contact.phone === null ? `Please Email Us` : `${animal.contact.phone}`}</p>
                         </li>
                     </ul>
                 </div>
+                <div class="line"></div>
         `
         results.appendChild(div)
     });
