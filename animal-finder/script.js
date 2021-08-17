@@ -1,3 +1,5 @@
+
+
 // uMwQhR9DNqEPO4sdjTT88yMxuT15pzdALG5KiMjXQGbUVFgrIC api key
 //qqugWMTBuAuDpEbMGSNRAyl3llQKJ9eMA3Tspmdj secret
 const key = 'uMwQhR9DNqEPO4sdjTT88yMxuT15pzdALG5KiMjXQGbUVFgrIC'
@@ -19,10 +21,9 @@ submit.addEventListener('click', function (e) {
     //let animalData
     if (type.value === 'none' | distance.value > 500 | zip.length < 5 | zip.length > 5) {
         console.log(`error`);
+        showAlert(`Something is incorrect`, `danger`)
+
     } else {
-        // type.value = 'dog'
-        // zip.value = 55378
-        // distance.value = 30
         console.log(type.value, distance.value, zip.length);
         return fetch(`https://api.petfinder.com/v2/oauth2/token`, {
             method: 'POST',
@@ -54,12 +55,6 @@ submit.addEventListener('click', function (e) {
     }
 })
 
-// function filterPhotos(pets) {
-//     pets.forEach(pet => console.log(pet.primary_photo_cropped))
-
-// }
-
-
 function showAnimals(pets) {
     //console.log(pets);
     const results = document.querySelector('.results')
@@ -86,6 +81,23 @@ function showAnimals(pets) {
         `
         results.appendChild(div)
     });
+}
+
+function showAlert(message, className) {
+    const container = document.querySelector(`.search-form-container`)
+    const form = document.querySelector(`.animal-form`)
+    const div = document.createElement('div')
+
+    div.classList.add(`alert`, `alert-${className}`)
+
+    div.appendChild(document.createTextNode(message))
+
+    container.insertBefore(div, form)
+
+    console.log(div);
+
+    setTimeout(() => document.querySelector('.alert').remove(), 3000)
+
 }
 
 

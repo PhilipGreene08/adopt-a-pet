@@ -102,6 +102,12 @@ form {
     gap: 10px;
 }
 
+form label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
  form label, form select, form input {
     border: none;
     border-radius: 5px;
